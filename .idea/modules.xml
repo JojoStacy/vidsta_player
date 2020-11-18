@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/AndroidProjects-Vidsta.iml" filepath="$PROJECT_DIR$/.idea/modules/AndroidProjects-Vidsta.iml" group="Vidsta" />
+      <module fileurl="file://$PROJECT_DIR$/Vidsta.iml" filepath="$PROJECT_DIR$/Vidsta.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vidstaexample/Vidsta-vidstaexample.iml" filepath="$PROJECT_DIR$/.idea/modules/vidstaexample/Vidsta-vidstaexample.iml" group="Vidsta/vidstaexample" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/vidsta/uk.co.jakelee-vidsta.iml" filepath="$PROJECT_DIR$/.idea/modules/vidsta/uk.co.jakelee-vidsta.iml" group="Vidsta/vidsta" />
+      <module fileurl="file://$PROJECT_DIR$/vidsta/vidsta.iml" filepath="$PROJECT_DIR$/vidsta/vidsta.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vidstaexample/vidstaexample.iml" filepath="$PROJECT_DIR$/vidstaexample/vidstaexample.iml" />
+    </modules>
+  </component>
+</project>
