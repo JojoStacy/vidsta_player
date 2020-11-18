@@ -98,7 +98,6 @@ public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceText
     private Map<String, String> headers = new HashMap<>();
     private boolean isFullScreen = false;
     private boolean isSetFullScreen;
-    private boolean fullscreenButtonVisible = true;
 
     private Activity baseAct;
     private int buttonTintColor = 0;
@@ -133,7 +132,7 @@ public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceText
                 isSetFullScreen = customAttr.getBoolean(R.styleable.VidstaPlayer_setFullScreen, false);
                 isFullScreen = isSetFullScreen;
                 autoLoop = customAttr.getBoolean(R.styleable.VidstaPlayer_autoLoop, false);
-                fullscreenButtonVisible = customAttr.getBoolean(R.styleable.VidstaPlayer_fullScreenButtonVisible, true);
+              //  fullscreenButtonVisible = customAttr.getBoolean(R.styleable.VidstaPlayer_fullScreenButtonVisible, true);
 
                 buttonTintColor = customAttr.getColor(R.styleable.VidstaPlayer_buttonTintColor, ContextCompat.getColor(getContext(), R.color.colorPrimaryText));
                 textColor = customAttr.getColor(R.styleable.VidstaPlayer_textColor, ContextCompat.getColor(getContext(), R.color.colorPrimaryText));
@@ -701,8 +700,8 @@ public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceText
     }
 
     public void setFullScreenButtonVisible(boolean visible) {
-        this.fullscreenButtonVisible = visible;
-        findViewById(R.id.imageButtonFullScreenToggle).setVisibility(fullscreenButtonVisible ? VISIBLE : INVISIBLE);
+        //this.fullscreenButtonVisible = visible;
+        //findViewById(R.id.imageButtonFullScreenToggle).setVisibility(fullscreenButtonVisible ? VISIBLE : INVISIBLE);
     }
 
     public void setButtonTintColor(int color) {
