@@ -24,6 +24,7 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
@@ -49,15 +50,15 @@ import uk.co.jakelee.vidsta.listeners.OnBackCalledListener;
 import uk.co.jakelee.vidsta.listeners.VideoStateListeners;
 
 public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceTextureListener, MediaPlayer.OnPreparedListener,
-        MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnVideoSizeChangedListener, View.OnClickListener,
+        MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnVideoSizeChangedListener,
         SeekBar.OnSeekBarChangeListener, MediaPlayer.OnErrorListener {
 
     private TextureView textureView;
     private MediaPlayer videoPlayer = new MediaPlayer();
-    private View controlPlayPause;
+   // private View controlPlayPause;
     private View videoLoadingView;
   //  private SeekBar seekBarDuration;
-    private ImageButton imgBtnPlayPause;
+  //  private ImageButton imgBtnPlayPause;
     //private ImageButton imgBtnFullScreenToggle;
     //private TextView tvPosition;
     //private TextView tvDuration;
@@ -170,7 +171,7 @@ public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceText
     public void start() {
         if (videoPlayer == null || !isPrepared) return;
         videoPlayer.start();
-        imgBtnPlayPause.setImageDrawable(pauseVideoDrawable);
+      //  imgBtnPlayPause.setImageDrawable(pauseVideoDrawable);
         //handler.post(seekBarProgress);
         if (onVideoStarted != null) onVideoStarted.OnVideoStarted(this);
     }
@@ -178,15 +179,14 @@ public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceText
     public void pause() {
         if (videoPlayer.isPlaying()) {
             videoPlayer.pause();
-            imgBtnPlayPause.setImageDrawable(playVideoDrawable);
-          //  handler.removeCallbacks(seekBarProgress);
+           // imgBtnPlayPause.setImageDrawable(playVideoDrawable);
         }
         if (onVideoPaused != null) onVideoPaused.OnVideoPaused(this);
     }
 
     public void stop() {
         videoPlayer.stop();
-        imgBtnPlayPause.setImageDrawable(playVideoDrawable);
+        //imgBtnPlayPause.setImageDrawable(playVideoDrawable);
       //  handler.removeCallbacks(seekBarProgress);
         if (onVideoStopped != null) onVideoStopped.OnVideoStopped(this);
     }
@@ -196,7 +196,7 @@ public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceText
         if (autoPlay) {
             start();
         } else {
-            imgBtnPlayPause.setImageDrawable(playVideoDrawable);
+          //  imgBtnPlayPause.setImageDrawable(playVideoDrawable);
         }
         //handler.removeCallbacks(seekBarProgress);
         if (onVideoRestart != null) onVideoRestart.OnVideoRestart(this);
@@ -220,36 +220,36 @@ public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceText
 
         rl.setId(99999);
 
-        rl.setOnClickListener(this);
+        rl.setOnTouchListener(onTouchListener);
 
         LayoutInflater li = LayoutInflater.from(getContext());
         videoLoadingView = li.inflate(R.layout.layout_video_loading_view, this, false);
         addView(videoLoadingView);
 
-        controlPlayPause = li.inflate(R.layout.layout_video_img_button_play_pause, this, false);
+        //controlPlayPause = li.inflate(R.layout.layout_video_img_button_play_pause, this, false);
    //     controlSeekBar = li.inflate(R.layout.layout_video_seek_bar, this, false);
-        FrameLayout.LayoutParams lp1 = (FrameLayout.LayoutParams) controlPlayPause.getLayoutParams();
+      //  FrameLayout.LayoutParams lp1 = (FrameLayout.LayoutParams) controlPlayPause.getLayoutParams();
       //  FrameLayout.LayoutParams lp2 = (FrameLayout.LayoutParams) controlSeekBar.getLayoutParams();
 
-        lp1.gravity = Gravity.CENTER;
+     //   lp1.gravity = Gravity.CENTER;
        // lp2.gravity = Gravity.BOTTOM;
 
-        addView(controlPlayPause, lp1);
+    //    addView(controlPlayPause, lp1);
      //   addView(controlSeekBar, lp2);
 
-        imgBtnPlayPause = (ImageButton) controlPlayPause.findViewById(R.id.imageButtonPlayPauseRetry);
+       // imgBtnPlayPause = (ImageButton) controlPlayPause.findViewById(R.id.imageButtonPlayPauseRetry);
        // imgBtnFullScreenToggle = (ImageButton) controlSeekBar.findViewById(R.id.imageButtonFullScreenToggle);
         //tvPosition = (TextView) controlSeekBar.findViewById(R.id.textViewPosition);
         //tvDuration = (TextView) controlSeekBar.findViewById(R.id.textViewDuration);
         proViewVideoLoading = (ProgressView) videoLoadingView.findViewById(R.id.proViewVideoLoading);
         //seekBarDuration = (SeekBar) controlSeekBar.findViewById(R.id.seekBarDuration);
-        imgBtnPlayPause.setImageDrawable(playVideoDrawable);
+        //imgBtnPlayPause.setImageDrawable(playVideoDrawable);
 
-        imgBtnPlayPause.setOnClickListener(this);
+       // imgBtnPlayPause.setOnClickListener(this);
         //imgBtnFullScreenToggle.setOnClickListener(this);
         textureView.setSurfaceTextureListener(this);
         //seekBarDuration.setOnSeekBarChangeListener(this);
-        controlPlayPause.setVisibility(INVISIBLE);
+      //  controlPlayPause.setVisibility(INVISIBLE);
         //controlSeekBar.setVisibility(INVISIBLE);
         proViewVideoLoading.start();
         setUpVideoPlayer();
@@ -287,7 +287,7 @@ public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceText
     public void onCompletion(MediaPlayer mediaPlayer) {
         //handler.removeCallbacks(seekBarProgress);
         Log.e("autoloop", "" + autoLoop);
-        imgBtnPlayPause.setImageDrawable(playVideoDrawable);
+        //imgBtnPlayPause.setImageDrawable(playVideoDrawable);
         if (onVideoFinished != null) onVideoFinished.OnVideoFinished(this);
     }
 
@@ -321,7 +321,7 @@ public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceText
         if (autoPlay) {
             start();
         } else {
-            controlPlayPause.setVisibility(VISIBLE);
+           // controlPlayPause.setVisibility(VISIBLE);
             //controlSeekBar.setVisibility(VISIBLE);
             start();
             pause();
@@ -401,7 +401,7 @@ public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceText
             pauseVideoDrawable.setColorFilter(dr.getColor(), PorterDuff.Mode.MULTIPLY);
             enterFullScreenDrawable.setColorFilter(dr.getColor(), PorterDuff.Mode.MULTIPLY);
             exitFullScreenDrawable.setColorFilter(dr.getColor(), PorterDuff.Mode.MULTIPLY);
-            imgBtnPlayPause.setImageDrawable(playVideoDrawable);
+          //  imgBtnPlayPause.setImageDrawable(playVideoDrawable);
         }
     }
 
@@ -410,19 +410,33 @@ public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceText
         if (autoLoop) videoPlayer.setLooping(true);
     }
 
+    private View.OnTouchListener onTouchListener = new View.OnTouchListener() {
+        @Override
+        public boolean onTouch(View v, MotionEvent event) {
+            switch (event.getAction()) {
+                case MotionEvent.ACTION_DOWN:
 
-    @Override
+
+                    pause();
+                    return true;
+                case MotionEvent.ACTION_UP:
+                    start();
+                    return true;
+            }
+            return false;
+        }
+    };
+
+/*    @Override
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.imageButtonPlayPauseRetry) {
+        if (id ==99999) {
             if (isPlaying()) {
                 pause();
             } else {
                 start();
-                toggleControls();
+               // toggleControls();
             }
-        } else if (id == 99999) {
-            toggleControls();
         } else if (id == R.id.imageButtonFullScreenToggle) {
             if (isFullScreen) {
                 onFullScreenToggleClick(false);
@@ -430,27 +444,19 @@ public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceText
                 onFullScreenToggleClick(true);
             }
         }
-    }
+    }*/
 
     public boolean isPlaying() {
         return (videoPlayer != null && videoPlayer.isPlaying());
     }
 
     public boolean controlsShowing() {
-        return (controlPlayPause.getVisibility() == VISIBLE);
+
+        //return (controlPlayPause.getVisibility() == VISIBLE);
+        return false;
     }
 
-    public void toggleControls() {
-        if (videoPlayer != null) {
-            if (controlsShowing()) {
-                animateControls(controlPlayPause, 1f, 0f, INVISIBLE);
-              //  animateControls(controlSeekBar, 1f, 0f, INVISIBLE);
-            } else {
-                animateControls(controlPlayPause, 0f, 1f, VISIBLE);
-               // animateControls(controlSeekBar, 0f, 1f, VISIBLE);
-            }
-        }
-    }
+
 
 
     public void animateControls(final View v, float f1, float f2, final int visibility) {
@@ -713,7 +719,7 @@ public class VidstaPlayer extends FrameLayout implements TextureView.SurfaceText
         exitFullScreenDrawable.setColorFilter(dr.getColor(), PorterDuff.Mode.MULTIPLY);
         previousVideoDrawable.setColorFilter(dr.getColor(), PorterDuff.Mode.MULTIPLY);
         nextVideoDrawable.setColorFilter(dr.getColor(), PorterDuff.Mode.MULTIPLY);
-        imgBtnPlayPause.setImageDrawable(playVideoDrawable);
+        //imgBtnPlayPause.setImageDrawable(playVideoDrawable);
     }
 
     public void setTextColor(int color) {
